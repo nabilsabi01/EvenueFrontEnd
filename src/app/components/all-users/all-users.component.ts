@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../services/admin-service.service';
 import { CommonModule } from '@angular/common';
+import {UserService} from "../../services/user.service";
+import {User} from "../model/user.model";
 
 @Component({
   selector: 'app-all-users',
@@ -10,31 +12,31 @@ import { CommonModule } from '@angular/common';
   styleUrl: './all-users.component.css',
 })
 export class AllUsersComponent implements OnInit {
-  allUsers: { _id: string; name: string; email: string }[] = [];
-  constructor(private _AdminService: AdminServiceService) {}
+  allUsers: User[] = [];
+
+  constructor(private _UserService: AdminServiceService) {
+  }
+
   ngOnInit(): void {
-    this._AdminService.getAllUsers().subscribe({
-      next: (res) => {
-        if (res.message == 'success') {
-          this.allUsers = res.data;
-        }
+    this._UserService.getAllUsers().subscribe({
+      next: (res: User[]) => {
+        this.allUsers = res;
+
       },
     });
   }
-  deleteUser(id:string){
-    this._AdminService.deleteUser(id).subscribe({
-      next:(res)=>{
-        if(res.message=='success'){
-          this._AdminService.getAllUsers().subscribe({
-            next: (res) => {
-              if (res.message == 'success') {
-                this.allUsers = res.data;
-              }
-            },
-          });
-        }
+
+  deleteUser(id:number){
+    this._UserService.deleteEvent(id).subscribe({
+      next:(_res)=>{
+        this._UserService.getAllUsers().subscribe({
+          next: (res) => {
+            this.allUsers = res;
+          },
+        });
       }
     });
-
   }
 }
+
+

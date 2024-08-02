@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {BehaviorSubject, Observable} from "rxjs";
+import {User} from "../components/model/user.model";
+import {Booking} from "../interfaces/reservation";
 
 export interface JwtAuthResponse {
   accessToken: string;
@@ -15,7 +17,9 @@ export interface JwtAuthResponse {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/auth'; // adjust as needed
+  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl1 = 'http://localhost:8080/api/dashboard';
+
   private userSubject: BehaviorSubject<boolean>;
   public user: Observable<boolean>;
 
@@ -70,8 +74,24 @@ export class UserService {
     this.userSubject.next(false);
   }
 
-  getUser(): any {
-    return localStorage.getItem('currentUser');
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
+  }
+
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`);
+  }
+
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
+  }
+
+  getAllBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.apiUrl}/bookings`);
+  }
+
+  getBookingsByUser(userId: number): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.apiUrl}/bookings/user/${userId}`);
   }
 
   private decodeToken(token: string) {

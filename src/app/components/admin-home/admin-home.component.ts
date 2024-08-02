@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../services/admin-service.service';
-import { Reservation } from '../../interfaces/reservation';
 import Chart from 'chart.js/auto';
 import { RouterModule } from '@angular/router';
 import { ChartModule } from 'primeng/chart';
+import {Booking} from "../../interfaces/reservation";
 
 @Component({
   selector: 'app-admin-home',
@@ -17,7 +17,7 @@ export class AdminHomeComponent implements OnInit{
   allUsersNum?:Number;
   allEventsNum?:Number;
   allReservationNum?:Number;
-  allResevations:Reservation[]=[]
+  allResevations:Booking[]=[]
   public chart: any;
   Slabel1=["number of Reservations"]
   reservationMonths:number[]=[];
@@ -28,9 +28,9 @@ export class AdminHomeComponent implements OnInit{
   totalTickets:number=0;
   reservedTickets:number=0;
   Events:any;
-  
+
   constructor(private _AdminService:AdminServiceService){}
- 
+
   ngOnInit(): void {
   this._AdminService.getEvents().subscribe({
     next:(res)=>{
@@ -46,7 +46,7 @@ export class AdminHomeComponent implements OnInit{
       }
     }
   });
-  
+
   this._AdminService.getAllUsers().subscribe({
     next:(res)=>{
       if(res.message=="success"){
@@ -54,7 +54,7 @@ export class AdminHomeComponent implements OnInit{
       }
     }
   });
-  
+
   this._AdminService.getAllReservations().subscribe({
     next:(res)=>{
       if(res.message=="success"){
@@ -88,7 +88,7 @@ export class AdminHomeComponent implements OnInit{
 
     this.reservationPrices= Array.from(monthTotals.values());
   }
-  
+
   getAllticketsNumbers(Events:any){
   for (let i = 0; i < Events.length; i++) {
     const currentArray = Events[i];

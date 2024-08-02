@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private router = inject(Router);
 
   ngOnInit(): void {
-    this.loggedIn = !!this.userService.getUser();
+    this.loggedIn = !!this.userService.getAllUsers();
     this.userName = localStorage.getItem('userName') || undefined;
 
     if (localStorage.getItem('userId')) {
