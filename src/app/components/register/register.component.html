@@ -1,0 +1,46 @@
+<div class=" d-flex justify-content-center align-items-center flex-column py-2">
+  <form [formGroup]="registerForm" (ngSubmit)="Register(registerForm)">
+    <div class="form justify-content-evenly gap-4 row  forms align-items-center my-2 ">
+      <div class="container d-flex justify-content-center py-2 col-8 ">
+
+      </div>
+      <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
+        <input class="inform bg-transparent " type="text" formControlName="name" placeholder="Name" />
+        <div *ngIf="registerForm.get('name') && registerForm.get('name')?.touched">
+          <p *ngIf="registerForm.get('name')?.getError('required')" class="text-danger">User Name is Required</p>
+          <p *ngIf="registerForm.get('name')?.getError('minlength')" class="text-danger">User Name should be at least 3
+            words </p>
+          <p *ngIf="registerForm.get('name')?.getError('maxlength')" class="text-danger">User Name should be maximum 10
+            words</p>
+        </div>
+      </div>
+      <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
+        <input class="inform bg-transparent" type="text" formControlName="email" placeholder="Email" />
+        <div *ngIf="registerForm.get('email')&& registerForm.get('email')?.touched">
+          <p *ngIf="registerForm.get('email')?.getError('required')" class="text-danger">Email is Required</p>
+          <p *ngIf="emailErrorMessage" class="alert alert-danger">{{emailErrorMessage}}</p>
+        </div>
+      </div>
+      <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
+        <input class="inform bg-transparent" type="password" formControlName="password" placeholder="Password" />
+        <div *ngIf="registerForm.get('password')&& registerForm.get('password')?.touched">
+          <p *ngIf="registerForm.get('password')?.getError('required')" class="text-danger">Password is Required</p>
+          <p *ngIf="registerForm.get('password')?.getError('pattern')" class="text-danger">Password should be Minimum
+            eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
+          </p>
+        </div>
+      </div>
+      <input (change)="onImageFileSelected($event)" name="image" type="file" id="image" formControlName="image"
+        class="form-control my-3" style="display: none" #imageInput>
+      <div *ngIf="registerForm.get('image')&& registerForm.get('image')?.touched">
+        <p *ngIf="registerForm.get('image')?.getError('required')" class="text-danger">Image is Required</p>
+        <p *ngIf="registerForm.get('image')?.getError('pattern')" class="text-danger">File should have only jpg, png,etc
+        </p>
+      </div>
+      <div class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">
+        <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="submit"
+          value="Register" data-bs-dismiss="modal" [disabled]="registerForm.invalid">Register</button>
+      </div>
+    </div>
+  </form>
+</div>
