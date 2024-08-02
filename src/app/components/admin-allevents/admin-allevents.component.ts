@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminServiceService } from '../../services/admin-service.service';
-import { MyEvent } from '../../interfaces/my-event';
+import { EventService } from '../../services/event.service';
+import { Event } from '../../interface/event';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,32 +12,30 @@ import { CommonModule } from '@angular/common';
 })
 
 export class AdminAlleventsComponent  implements OnInit {
-  allEvents:MyEvent[] = [];
-  constructor(private _AdminService: AdminServiceService) {}
+  allEvents:Event[] = [];
+  constructor(private _EventService: EventService) {}
   ngOnInit(): void {
-    this._AdminService.getEvents().subscribe({
-      next: (res) => {
-        if (res.message == 'success') {
-          this.allEvents = res.data;
-          console.log(this.allEvents);
-
-        }
+    this._EventService.getAllEvents().subscribe({
+      next: (res: Event[]) => {
+        this.allEvents = res;
       },
+      error: (err) => console.error('Error fetching events:', err)
     });
   }
-  deleteEvent(id:string){
-    this._AdminService.deleteEvent(id).subscribe({
-      next:(res)=>{
-        if(res.message=='success'){
-          this._AdminService.getEvents().subscribe({
-            next: (res) => {
-              if (res.message == 'success') {
-                this.allEvents = res.data;
-              }
-            },
-          });
-        }
-      }
-    });
-  }
+
+  // deleteEvent(id:string){
+  //   this._EventService.deleteEvent(id).subscribe({
+  //     next:(res)=>{
+  //       if(res.message=='success'){
+  //         this._EventService.getEvents().subscribe({
+  //           next: (res) => {
+  //             if (res.message == 'success') {
+  //               this.allEvents = res.data;
+  //             }
+  //           },
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 }

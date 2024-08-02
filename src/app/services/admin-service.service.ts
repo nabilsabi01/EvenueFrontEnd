@@ -23,7 +23,8 @@ export class AdminServiceService {
   deleteUser(id: string): Observable<any> {
     return this._HttpClient.delete(`http://localhost:7005/users/${id}`)
   }
-  deleteEvent(id: string): Observable<any> {
+
+  deleteEvent(id: number): Observable<any> {
     return this._HttpClient.delete(`http://localhost:7005/events/${id}`)
   }
 }

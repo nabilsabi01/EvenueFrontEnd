@@ -17,7 +17,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {
     path: 'adminHome',
-    canActivate: [adminProtectGuard],
     component: AdminHomeComponent,
   },
   {
@@ -27,7 +26,6 @@ export const routes: Routes = [
   },
   {
     path: 'adminevents',
-    canActivate: [adminProtectGuard],
     component: AdminAlleventsComponent,
   },
   {
