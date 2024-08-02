@@ -23,19 +23,15 @@ export class AdminAlleventsComponent  implements OnInit {
     });
   }
 
-  // deleteEvent(id:string){
-  //   this._EventService.deleteEvent(id).subscribe({
-  //     next:(res)=>{
-  //       if(res.message=='success'){
-  //         this._EventService.getEvents().subscribe({
-  //           next: (res) => {
-  //             if (res.message == 'success') {
-  //               this.allEvents = res.data;
-  //             }
-  //           },
-  //         });
-  //       }
-  //     }
-  //   });
-  // }
+  deleteEvent(id:number){
+    this._EventService.deleteEvent(id).subscribe({
+      next:(_res)=>{
+        this._EventService.getAllEvents().subscribe({
+          next: (res) => {
+            this.allEvents = res;
+          },
+        });
+      }
+    });
+  }
 }

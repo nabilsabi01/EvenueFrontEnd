@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {BehaviorSubject, Observable} from "rxjs";
 
 export interface JwtAuthResponse {
   accessToken: string;

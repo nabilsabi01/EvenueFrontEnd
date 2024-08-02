@@ -6,7 +6,7 @@
         <h4 class="position-absolute top-50 start-50 pt-2 translate-middle text-white">Evenue</h4>
       </a>
       <button class="navbar-toggler toggle-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse justify-content-center navbar-collapse" id="navbarSupportedContent">
@@ -17,7 +17,7 @@
           <li class="nav-item mb-3 mb-lg-0 rounded-5" *ngIf="role === 'ROLE_ADMIN'">
             <a class="nav-link fs-5 text-light rounded-5" routerLink="/adminHome" routerLinkActive="active">Home</a>
           </li>
-          <li class="nav-item mb-3 mb-lg-0 rounded-5" *ngIf="role === 'ROLE_ADMIN'">
+          <li class="nav-item mb-3 mb-lg-0 rounded-5" *ngIf="isAdminHome">
             <a class="nav-link fs-5 text-light rounded-5" routerLink="/addEvent" routerLinkActive="active">Add Event</a>
           </li>
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
@@ -34,7 +34,7 @@
         <div class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center">
           <button *ngIf="loggedIn" id="btn1" class="fs-5 border-0 border-white rounded-pill px-4 py-2 login-logout-btn" (click)="logOut()">Log Out</button>
           <div *ngIf="!loggedIn">
-            <button id="btn1" type="button" class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 login-logout-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign in</button>
+            <button id="btn1" type="button" class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 login-logout-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">login</button>
             <div class="modal modal-login fade" id="exampleModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">

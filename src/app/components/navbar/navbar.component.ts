@@ -15,6 +15,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isHomeRoute = false;
+  isAdminHome = false;  // Ajouté pour vérifier la route adminHome
   role: string | undefined;
   userName: string | undefined;
   loggedIn = false;
@@ -57,6 +58,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.isHomeRoute = event.url === '/home';
+        this.isAdminHome = event.url === '/adminHome'; // Vérifiez si l'URL est adminHome
       }
     });
   }
@@ -69,5 +71,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.userService.logOut();
     this.userName = undefined;
     this.role = undefined;
+    this.router.navigate(['/login']); // Redirection vers la page de connexion
   }
 }
