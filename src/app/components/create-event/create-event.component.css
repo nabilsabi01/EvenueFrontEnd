@@ -1,0 +1,11 @@
+label{
+    color:var(--bg-purple)
+}
+
+h1{
+    color:var(--bg-purple) 
+}
+
+.border-transparent{
+    border: none;
+}
